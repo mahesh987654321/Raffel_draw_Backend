@@ -100,7 +100,13 @@ class MyDb {
    * @returns {Array<Ticket>}
    */
   draw(winnerCount) {
-    
+    let indexes = new Array(winnerCount);
+    for (let i = 0; i < indexes.length; i++) {
+      let index = Math.floor(Math.random() * this.tickets.length);
+      if (indexes.includes(index)) {
+        index = Math.floor(Math.random() * this.tickets.length);
+      }
+    }
   }
 }
 const MyDb = new MyDb();
