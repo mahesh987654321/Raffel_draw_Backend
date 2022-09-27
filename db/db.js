@@ -1,6 +1,6 @@
 const Ticket = require("../models/Tickets");
 
-class MyDb {
+class myDb {
   constructor() {
     this.tickets = [];
   }
@@ -101,14 +101,22 @@ class MyDb {
    */
   draw(winnerCount) {
     let indexes = new Array(winnerCount);
-    for (let i = 0; i < indexes.length; i++) {
-      let index = Math.floor(Math.random() * this.tickets.length);
-      if (indexes.includes(index)) {
-        index = Math.floor(Math.random() * this.tickets.length);
+    let count = 0;
+    while (count < winnerCount) {
+      let indexCount = Math.floor(Math.random() * this.tickets.length);
+      if (!indexes.includes(indexCount)) {
+        indexes[count++] = indexCount;
+        continue;
       }
     }
+    // for (let i = 0; i < indexes.length; i++) {
+    //   let index = Math.floor(Math.random() * this.tickets.length);
+    //   indexes[i] = index;
+    // }
+    const winners = indexes.map((index) => this.tickets[index]);
+    return winners;
   }
 }
-const MyDb = new MyDb();
+myDb = new myDb();
 
-module.exports = MyDb;
+module.exports = myDb;
